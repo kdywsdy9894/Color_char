@@ -104,14 +104,14 @@ body {
 
   .image-upload-wrap {
     margin-top: 20px;
-    border: 4px dashed #1FB264;
+    border: 4px dashed rgba(0, 0, 0, 0.5);;
     position: relative;
   }
 
   .image-dropping,
   .image-upload-wrap:hover {
-    background-color: #1FB264;
-    border: 4px dashed #ffffff;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 4px dashed rgba(0, 0, 0, 0.5);;
   }
 
   .image-title-wrap {
@@ -163,3 +163,9 @@ body {
     border: 0;
     transition: all .2s ease;
   }
+
+  @media screen and (max-width: 600px) {
+  body {
+    font-size : 10px;
+  }
+}
