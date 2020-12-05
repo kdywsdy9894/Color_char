@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>practice</title>
+    <title>process</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <section class="section">
       <h1 class="title">이 공간 이 순간</h1>
+        <h2 class ="result-message"></h2>
     </section>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <div class="file-upload">
@@ -18,7 +19,6 @@
         </div>
         <div class="file-upload-content">
             <img class="file-upload-image" id="color-image" src="#" alt="your image" />
-            <p class ="result-message"></p>
             <div id="label-container"></div>
             <div class="image-title-wrap">
                 <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
@@ -106,36 +106,47 @@
                     break;
                 case "blue":
                     resultmessage = "BLUE"
+                    document.body.style.backgroundImage = "url('toa-heftiba-xAQZ8plN8cM-unsplash.jpg')";
                     break;
                 case "brown":
                     resultmessage = "BROWN"
+                    document.body.style.backgroundImage = "url('omid-armin-QMlMWL4H9so-unsplash.jpg')";
                     break;
                 case "gray":
                     resultmessage = "GRAY"
+                    document.body.style.backgroundImage = "url('annie-spratt-yI3weKNBRTc-unsplash.jpg')";
                     break;
                 case "green":
                     resultmessage = "GREEN"
+                    document.body.style.backgroundImage = "url('miha-rekar--wm9OmdN_Ig-unsplash.jpg')";
                     break;
                 case "mint":
                     resultmessage = "MINT"
+                    document.body.style.backgroundImage = "url('pawel-czerwinski-XyDUj57VzFM-unsplash.jpg')";
                     break;
                 case "navy":
                     resultmessage = "NAVY"
+                    document.body.style.backgroundImage = "url('ratapan-anantawat-Uz_S2hsTmRo-unsplash.jpg')";
                     break;
                 case "orange":
                     resultmessage = "ORANGE"
+                    document.body.style.backgroundImage = "url('samantha-kennedy-yRIBEupK5j0-unsplash.jpg')";
                     break;
                 case "pink":
                     resultmessage = "PINK"
+                    document.body.style.backgroundImage = "url('lidya-nada-2qwsi7oe4q4-unsplash.jpg')";
                     break;
                 case "purple":
                     resultmessage = "PURPLE"
+                    document.body.style.backgroundImage = "url('adrian-pelletier-PFdADjBd15M-unsplash.jpg')";
                     break;
                 case "red":
                     resultmessage = "RED"
+                    document.body.style.backgroundImage = "url('charles-deluvio-oWTW-jNGl9I-unsplash.jpg')";
                     break;
                 case "yellow":
                     resultmessage = "YELLOW"
+                    document.body.style.backgroundImage = "url('snapbythree-my-YiF5f2KaO_Y-unsplash.jpg')";
                     break;
                 default :
                     resultmessage = "NONE"
