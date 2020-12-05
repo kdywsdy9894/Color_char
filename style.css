@@ -3,6 +3,16 @@ body {
     margin :0;
 }
 
+h2 {
+  color: white;
+}
+
+.bg-color {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .content {
     position : fixed;
@@ -54,7 +64,7 @@ body {
 
   .file-upload {
     background-color: #ffffff;
-    width: 600px;
+    width: 230px;
     margin: 0 auto;
     padding: 20px;
   }
