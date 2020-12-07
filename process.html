@@ -12,15 +12,16 @@
 
 <body>
     <section class="section">
-        <h1 class="title">이 공간 이 순간</h1>
-        <h2 class="result-message"></h2>
+        <h1 class="title">이 공간, 이 순간</h1>
+        <h2 class="result-color"></h2>
     </section>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <div class="mt-3 container file-upload">
         <div class="image-upload-wrap">
             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
             <div class="drag-text">
-                <h3 class="mb-5 pb-5 pt-4  upload-text">사진을 드래그 또는 첨부해주세요!</h3>
+                <h3 class="mb-5 pb-5 pt-4  upload-text">지금 감정을 대변하는 사진을 보여주세요!</h3>
+
             </div>
         </div>
         <div class="file-upload-content">
@@ -28,20 +29,21 @@
             <div id="loading" class="animated bounce">
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
-                </div>    
-                <p class="text-center">AI가 당시 분위기를 분석중입니다.</p>
+                </div>
+                <p class="text-center">당신의 감정을 분석중입니다...</p>
             </div>
+            <p class="result-message"></p>
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
 
-                <div class="pt-3 image-title-wrap">
-                    <button type="button p-2" class="try-again-btn" onclick="location.href = 'process.html';">
-                        <span class="try-again-text">다른 사진으로 재시도</span>
-                    </button>
-                </div>
+            <div class="pt-3 image-title-wrap">
+                <button type="button p-2" class="try-again-btn" onclick="location.href = 'process.html';">
+                    <span class="try-again-text">다른 감정도 알아볼까요?</span>
+                </button>
             </div>
         </div>
-        </div>
-        <div id="webcam-container"></div>
+    </div>
+    </div>
+    <div id="webcam-container"></div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <script>
@@ -105,106 +107,122 @@
             const prediction = await model.predict(image, false);
             prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
             console.log(prediction[0].className);
-            var resultmessage;
+            var resultcolor;
+            var resultexplain;
             switch (prediction[0].className) {
                 case "black":
-                    resultmessage = "BLACK"
+                    resultcolor = "BLACK"
+                    resultexplain = "공포, 어둠과 악과는 반대로 섹시함을 뿜어내는 검정색. 당신은 매우 독립적이며 주위를 자신의 통제하에 놓길 바랄 확률이 높습니다. 섬세하고 내향적이지 않지만 다른 사람들과 적당한 거리를 유지하며 약점을 노출하지 않고 세련됨을 유지합니다. 당신은 성공할 수 있지만 만족하지 못하고 마음 어딘가 남아있는 공허함에 끝없는 갈망을 느낄 수도 있습니다. 또한 깊이를 알 수 없는 속에서 나오는 절제됨은 많은 사람들이 섹시하다고 생각합니다. 내일은 검정색 옷을 맞춰 입고 나가볼까요?"
                     document.body.style.backgroundImage = "url('lobostudio-hamburg-RvQYmGfmsKo-unsplash.jpg')";
                     break;
                 case "blue":
-                    resultmessage = "BLUE"
+                    resultcolor = "BLUE"
+                    resultexplain = "차갑고 시원해! 끝인 줄 알았나요? 평화와 고요함의 상징인 파란색은 실제로 혈압을 낮추며 업무 생산성을 높이는데 효과가 있다고 합니다. 이 색을 택한 당신은 대체로 조화롭고 의지할 수 있고 감수성이 풍부한 사람입니다. 사회성이 또한 뛰어나며 소위 말하는 '인싸'일 확률이 높습니다. 남을 잘 챙겨주며 많은 사람들의 사랑이 필요한 당신은 오히려 자신을 잘 돌보지 못합니다. 겉으로 자신이 넘치지만 속마음엔 숨기는것이 있을 수 있습니다. 페이스북 부터 삼성까지 최고의 기업들이 사랑한 파란색! 오늘만큼은 남보다 자신을 먼저 생각해보는것이 어떨까요?" 
                     document.body.style.backgroundImage = "url('toa-heftiba-xAQZ8plN8cM-unsplash.jpg')";
                     break;
                 case "brown":
-                    resultmessage = "BROWN"
+                    resultcolor = "BROWN"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('omid-armin-QMlMWL4H9so-unsplash.jpg')";
                     break;
                 case "gray":
-                    resultmessage = "GRAY"
+                    resultcolor = "GRAY"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('annie-spratt-yI3weKNBRTc-unsplash.jpg')";
                     break;
                 case "green":
-                    resultmessage = "GREEN"
+                    resultcolor = "GREEN"
+                    resultexplain = "새싹들이 피어오르는 상상을 해보세요! 자연, 성장, 회복 등을 상징하는 초록색은 건강하고 믿음을 주기 때문에 스타벅스를 포함해 많은 기업들이 브랜딩에 사용합니다. 당신은 성실하고 신뢰할 수 있으며 대체로 EQ가 뛰어날 확률이 높습니다. 또한 온화하고 관대하며 친절하므로 조직을 형성하는데 반드시 필요한 색입니다. 또한 이 색은 당신의 스트레스를 환기와 완화를 시켜줄 것입니다. 마음이 지칠땐 자연에 몸을 맡겨보는 것이 어떨까요?" 
                     document.body.style.backgroundImage = "url('miha-rekar--wm9OmdN_Ig-unsplash.jpg')";
                     break;
                 case "mint":
-                    resultmessage = "MINT"
+                    resultcolor = "MINT"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('pawel-czerwinski-XyDUj57VzFM-unsplash.jpg')";
                     break;
                 case "navy":
-                    resultmessage = "NAVY"
+                    resultcolor = "NAVY"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('ratapan-anantawat-Uz_S2hsTmRo-unsplash.jpg')";
                     break;
                 case "orange":
-                    resultmessage = "ORANGE"
+                    resultcolor = "ORANGE"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('samantha-kennedy-yRIBEupK5j0-unsplash.jpg')";
                     break;
                 case "pink":
-                    resultmessage = "PINK"
+                    resultcolor = "PINK"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('lidya-nada-2qwsi7oe4q4-unsplash.jpg')";
                     break;
                 case "purple":
-                    resultmessage = "PURPLE"
+                    resultcolor = "PURPLE"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('adrian-pelletier-PFdADjBd15M-unsplash.jpg')";
                     break;
                 case "red":
-                    resultmessage = "RED"
+                    resultcolor = "RED"
+                    resultexplain = "지금 사랑을 느끼나요, 분노를 느끼나요? 빨간색은 공격적이고 경감심을 주는 동시에 주의를 단번에 사로잡을 수 있으며 가장 열정적인 색입니다. 당신은 이 색을 통해 가장 뚜렷한 감정을 내비칠 수 있으며 일상생활에서도 사이렌, 표지판, 간판등 곳곳에서 접할 수 있습니다. 당신은 외향적이며 용기있고 낙관적인 사람일 확률이 높습니다. 야망이 크고 경쟁을 즐기는 당신은 꿈을 향해 쫓는것에 대한 두려움이란 없습니다. 하지만 다혈질인 부분도 있을 수 있고, 성격이 비교적 급할 수 있습니다. 열정만큼 사랑에 쏟아보는걸 어떨까요?" 
                     document.body.style.backgroundImage = "url('charles-deluvio-oWTW-jNGl9I-unsplash.jpg')";
                     break;
                 case "yellow":
-                    resultmessage = "YELLOW"
+                    resultcolor = "YELLOW"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
                     document.body.style.backgroundImage = "url('snapbythree-my-YiF5f2KaO_Y-unsplash.jpg')";
                     break;
                 default:
-                    resultmessage = "NONE"
+                    resultcolor = "NONE"
+                    resultexplain = "Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro." 
             }
-            $('.result-message').html(resultmessage);
+            var explain = "<div class='color-explain pt-2'>" + resultexplain + "</div>"
+            $('.result-color').html(resultcolor);
+            $('.result-message').html(resultexplain);
             var barWidth;
             for (let i = 0; i < 4; i++) {
-                if (prediction[i].probability.toFixed(2) >= 0.01) {
+                if (prediction[i].probability.toFixed(2) >= 0.1) {
                     barWidth = Math.round(prediction[i].probability.toFixed(2) * 100) + "%";
-                } else if (prediction[i].probability.toFixed(2) > 0.001) {
-                    barWidth = "1%"
+                } else if (prediction[i].probability.toFixed(2) > 0.01) {
+                    barWidth = "4%"
                 } else {
-                    barWidth = "0%"
+                    barWidth = "3%"
                 }
                 var labelTitle;
                 switch (prediction[i].className) {
                     case "blue":
-                        labelTitle = "파란색"
+                        labelTitle = '<span style="color:#0000ff">파란색</span>';
                         break;
                     case "black":
-                        labelTitle = "검은색"
+                        labelTitle = '<span style="color:#00000">검은색</span>';
                         break;
                     case "brown":
-                        labelTitle = "갈색"
+                        labelTitle = '<span style="color:#a52a2a">갈색</span>';
                         break;
                     case "gray":
-                        labelTitle = "회색"
+                        labelTitle = '<span style="color:#808080">회색</span>';
                         break;
                     case "green":
-                        labelTitle = "초록색"
+                        labelTitle = '<span style="color:#008000">초록색</span>';
                         break;
                     case "mint":
-                        labelTitle = "민트색"
+                        labelTitle = '<span style="color:#00FFFF">민트색</span>';
                         break;
                     case "navy":
-                        labelTitle = "남색"
+                        labelTitle = '<span style="color:#000080">남색</span>';
                         break;
                     case "orange":
-                        labelTitle = "주황색"
+                        labelTitle = '<span style="color:#FFA500">주황색</span>';
                         break;
                     case "pink":
-                        labelTitle = "핑크색"
+                        labelTitle = '<span style="color:#FFC0CB">핑크색</span>';
                         break;
                     case "purple":
-                        labelTitle = "보라색"
+                        labelTitle = '<span style="color:#800080">보라색</span>';
                         break;
                     case "red":
-                        labelTitle = "빨강색"
+                        labelTitle = '<span style="color:#FF0000">빨강색</span>';
                         break;
                     case "yellow":
-                        labelTitle = "노란색"
+                        labelTitle = '<span style="color:#FFFF00">노란색</span>';
                         break;
                     default:
                         labelTitle = "알수없음"
