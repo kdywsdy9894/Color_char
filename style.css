@@ -3,8 +3,13 @@ body {
   height: 100%;
 }
 
+
 .section {
   margin-top: 50px;
+}
+
+.result-message {
+  font-size: 1.5rem;
 }
 
 h1 {
@@ -231,7 +236,7 @@ border-radius: 10px;
 background-color: rgba(255, 255, 0, 1);
 }
 .percent-text {
-font-size: 1rem;
+font-size: 0.8rem;
 color: #ffffff;
 }
 .color-label {
@@ -261,15 +266,6 @@ position: relative;
   color : #f1f1f1;
   width: 100%;
   padding : 20px;
-}
-
-video {
-object-fit: cover;
-width: 100vw;
-height: 100vh;
-position: fixed;
-top: 0;
-left: 0;
 }
 
 .file-upload {
@@ -331,6 +327,7 @@ margin-top: 20px;
 object-fit: contain;
 border-radius: 10px;
 border: 4px dashed rgba(0, 0, 0, 0.5);;
+width: 350px;
 position: relative;
 }
 
