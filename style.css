@@ -531,6 +531,20 @@ color: #ffffff;
 padding: 4px 15px;
 }
 
+.index-btn {
+  border-radius: 40px;
+  border: solid 1.5px #35465d;
+  background-color: white;
+  }
+  
+  .index-btn-text {
+  display: block;
+  font-size: 1.5rem;
+  text-align: center;
+  color:  #35465d;
+  padding: 4px 15px;
+  }
+
 .remove-image:hover {
 background: #c13b2a;
 color: #ffffff;
