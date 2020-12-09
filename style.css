@@ -186,6 +186,7 @@ body {
 
 .result-message {
   font-size: 1.5rem;
+  font-family: 'Noto Serif KR', serif;
 }
 
 .title {
@@ -521,23 +522,27 @@ padding: 10px;
 border-radius: 40px;
 border: solid 1.5px #35465d;
 background-color: #35465d;
+margin : 10px;
+margin-top:0px;
 }
 
 .try-again-text {
-display: block;
-font-size: 1.5rem;
-text-align: center;
-color: #ffffff;
-padding: 4px 15px;
-}
+ display: block;
+ font-size: 1.5rem;
+ text-align: center;
+ color: #ffffff;
+ padding: 4px 15px;
+ }
 
 .index-btn {
   border-radius: 40px;
   border: solid 1.5px #35465d;
   background-color: white;
+  margin : 10px;
+  margin-top:0px;
   }
   
-  .index-btn-text {
+.index-btn-text {
   display: block;
   font-size: 1.5rem;
   text-align: center;
