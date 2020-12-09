@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>OIAL</title>
+    <title>이 순간, 이 색</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
@@ -23,7 +23,6 @@
             <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
             <div class="drag-text">
                 <h3 class="mb-5 pb-5 pt-4  upload-text">지금 감정을 대변하는 사진을 보여주세요!</h3>
-
             </div>
         </div>
         <div class="file-upload-content">
@@ -37,7 +36,6 @@
             <h2 class="result-color"></h2>
             <p class="result-message"></p>
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-
             <div class="pt-3 image-title-wrap">
                 <button type="button p-2" class="try-again-btn" onclick="location.href = 'process.html';">
                     <span class="try-again-text">다른 감정도 알아볼까요?</span>
@@ -160,7 +158,7 @@
                 case "purple":
                     resultcolor = '<span style="color:#800080">PURPLE</span>';
                     resultexplain = "알렉산더 대왕과 이집트의 파라오들이 사랑한 보라색! 뿐만 아니라 유니콘부터 마법까지 모두 보라색입니다. 자연속에서 찾기 힘든 색이므로 고귀하며 젊은 여성들이 선호하는 색으로 알려져 있습니다. 또한 베일에 쌓인 신비감을 주기때문에 호기심을 자극하고 흥미를 유발합니다. 이 색을 통해 당신은 통찰력을 키워 창의성을 높일 수 있습니다. 당신은 자비롭고 이해심이 많으며 자유로윤 영혼일 확률이 높습니다.  오늘은 라벤더 꽃을 사서 좋아하는 사람에게 마음을 표현하는것을 상상해보는게 어떨까요?"
-                    document.body.style.backgroundImage = "url('sharon-mccutcheon-aKql9HqH2Xs-unsplash.jp')";
+                    document.body.style.backgroundImage = "url('sharon-mccutcheon-aKql9HqH2Xs-unsplash.jpg')";
                     break;
                 case "red":
                     resultcolor = '<span style="color:#FF0000">RED</span>';
@@ -235,9 +233,6 @@
             }
         }
     </script>
-    <div style="text-align:center;">
-        <input type="button" value="결과를 확인해봐요!" onclick="location.href='result.html'">
-    </div>
 </body>
 <!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
 

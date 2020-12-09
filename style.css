@@ -1,6 +1,9 @@
+html {
+  height: 100%
+}
+
 body {
   margin :0;
-  height: 100%;
 }
 
 .section {
@@ -27,6 +30,8 @@ body {
 border: none;
 border-radius:5px;
 transition-duration: 0.4s;
+width: 100px;
+height: 100px;
 }
 
 .buttonGreen {
@@ -435,7 +440,7 @@ position: relative;
 background-color: #ffffff;
 border-radius: 20px;
 margin: 0 auto;
-padding: 15% 3%;
+padding: 5% 3%;
 }
 
 .file-upload-btn {
@@ -487,17 +492,18 @@ cursor: pointer;
 
 .image-upload-wrap {
 width: 60%;
+height : 100%;
 margin: 0 auto;
 object-fit: contain;
 border-radius: 10px;
-border: 4px dashed rgba(0, 0, 0, 0.5);;
+border: 2px dashed rgba(0, 0, 0, 0.5);;
 position: relative;
 }
 
 .image-dropping,
 .image-upload-wrap:hover {
 background-color: rgba(0, 0, 0, 0.1);
-border: 4px dashed rgba(0, 0, 0, 0.5);;
+border: 2px dashed rgba(0, 0, 0, 0.5);;
 }
 
 .image-title-wrap {
@@ -511,8 +517,9 @@ text-align: center;
 
 .drag-text h3 {
 font-weight: 500;
-text-transform: uppercase;
 color: #15824B;
+line-height: 400px;
+overflow: visible;
 }
 
 .file-upload-image {
