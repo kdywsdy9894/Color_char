@@ -492,11 +492,10 @@ cursor: pointer;
 
 .image-upload-wrap {
 width: 60%;
-height : 100%;
 margin: 0 auto;
 object-fit: contain;
 border-radius: 10px;
-border: 2px dashed rgba(0, 0, 0, 0.5);;
+border: 1.5px dashed rgba(0, 0, 0, 0.5);;
 position: relative;
 }
 
@@ -518,7 +517,6 @@ text-align: center;
 .drag-text h3 {
 font-weight: 500;
 color: #15824B;
-line-height: 400px;
 overflow: visible;
 }
 
