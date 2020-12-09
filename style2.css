@@ -1,0 +1,175 @@
+.section {
+    margin-top: 50px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+.title {
+    text-align : center;
+    line-height : 2;
+    }
+    
+    .subtitle {
+    text-align : center;
+    line-height : 1.5;
+    }
+
+.wrapper{
+    display : grid;
+    grid-template-columns : 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px;
+    grid-gap: 10px;
+    place-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button{
+  border: none;
+  border-radius:5px;
+  transition-duration: 0.4s;
+}
+
+  .buttonGreen {
+    background:url(miha-rekar--wm9OmdN_Ig-unsplash.jpg) no-repeat; 
+    color:  white;
+    background-size:cover;
+  }
+  
+  .buttonGreen:hover {
+    background:none;
+    color: rgba(0, 255, 0, 1);
+  }
+  
+  .buttonBlue {
+    background: URL(toa-heftiba-xAQZ8plN8cM-unsplash.jpg) no-repeat;
+    opacity: 0.2;
+    color: rgba(0, 0, 255, 1);
+    background-size:cover; 
+  }
+  
+  .buttonBlue:hover {
+    opacity: 1;
+    color: white;
+    background-size:cover;
+  }
+  
+  .buttonRed {
+    background:url(charles-deluvio-oWTW-jNGl9I-unsplash.jpg) no-repeat;
+    color: white; 
+    background-size:cover;
+  }
+  
+  .buttonRed:hover {
+    background:none;
+    color: #f44336;
+  }
+  
+  .buttonGray {
+    background:URL(annie-spratt-yI3weKNBRTc-unsplash.jpg) no-repeat;
+    color: white;
+    background-size:cover;
+  }
+  
+  .buttonGray:hover {
+    background: none;
+    color:rgba(128, 128, 128, 1);
+  } 
+  
+  .buttonBlack {
+    background:URL(ulysse-pointcheval-CbQMwHk5lKE-unsplash.jpg) no-repeat;
+    color:white;
+    background-size:cover;
+  }
+  
+  .buttonBlack:hover {
+    background:none;
+    color:rgba(0, 0, 0, 1);
+
+  }
+
+  .buttonBrown {
+    background: url(omid-armin-QMlMWL4H9so-unsplash.jpg) no-repeat;
+    opacity: 0.2;
+    color:rgba(165, 42, 42, 1);
+    background-size:cover;
+  }
+  
+  .buttonBrown:hover {
+    color: white;
+    opacity: 1;
+    background-size:cover;
+  }
+  .buttonPink {
+    background:URL(sharon-mccutcheon-AjPHdF-UrL8-unsplash.jpg);
+    opacity: 0.2;
+    color: rgba(255, 192, 203, 1);
+    background-size:cover;
+  }
+  
+  .buttonPink:hover {
+    background:URL(sharon-mccutcheon-AjPHdF-UrL8-unsplash.jpg);
+    color: white;
+    opacity :1;
+    background-size:cover;
+  }
+  .buttonOrange {
+    background:URL(kobby-mendez-blwtWUcMVf8-unsplash.jpg);
+    color: white;
+    background-size:cover;
+  }
+  
+  .buttonOrange:hover {
+    background: none;
+    color: rgba(255, 127, 80, 1);
+  }
+  .buttonYellow {
+    background: URL(snapbythree-my-YiF5f2KaO_Y-unsplash.jpg) no-repeat;
+    opacity: 0.2;
+    color:rgb(255, 217, 0, 1);
+    background-size:cover;
+  }
+  
+  .buttonYellow:hover {
+    color: white;
+    opacity: 1;
+    background-size:cover;
+  }
+  .buttonNavy {
+    background: URL(ratapan-anantawat-Uz_S2hsTmRo-unsplash.jpg) no-repeat;
+    color: white;
+    background-size:cover;
+  }
+  
+  .buttonNavy:hover {
+    background: none;
+    color: rgba(0, 0, 128, 1);
+  }
+  .buttonMint {
+    background:URL(pawel-czerwinski-XyDUj57VzFM-unsplash.jpg) no-repeat;
+    opacity: 0.2;
+    color:  rgba(0, 255, 255, 1);
+    background-size:cover;
+  }
+  
+  .buttonMint:hover {
+    color: white;
+    opacity: 1;
+    background-size:cover;
+  }
+  .buttonPurple {
+    background:url(adrian-pelletier-PFdADjBd15M-unsplash.jpg) no-repeat;
+    opacity: 0.2;
+    color: rgba(128, 0, 128, 1);
+    background-size:cover;
+  }
+  
+  .buttonPurple:hover {
+    opacity: 1;
+    color: white;
+    background-size:cover;
+  }
