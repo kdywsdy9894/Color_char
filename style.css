@@ -426,16 +426,6 @@ color: #ffffff;
   margin: 0 auto;
 }
 
-label {
-cursor: pointer;
-display: inline-block;
-width: 90px;
-height: 41px;
-box-shadow: 0 0 0 8px #e5e9ea inset;
-border-radius: 30px;
-position: relative;
-}
-
 .file-upload {
 background-color: #ffffff;
 border-radius: 20px;
@@ -491,7 +481,7 @@ cursor: pointer;
 }
 
 .image-upload-wrap {
-width: 60%;
+width: 90%;
 margin: 0 auto;
 object-fit: contain;
 border-radius: 10px;
