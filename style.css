@@ -4,11 +4,11 @@ html {
 
 body {
   margin :0;
+  font-family: 'Noto Serif KR', serif;
 }
 
 .section {
   margin-top: 50px;
-  font-family: 'Noto Serif KR', serif;
 }
 
 .wrapperbutton{
@@ -181,12 +181,10 @@ body {
 
 .section {
   margin-top: 50px;
-  font-family: 'Noto Serif KR', serif;
 }
 
 .result-message {
-  font-size: 1.5rem;
-  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem;
 }
 
 .title {
@@ -509,6 +507,7 @@ text-align: center;
 font-weight: 500;
 color: #15824B;
 overflow: visible;
+font-family: 'Noto Serif KR', serif;
 }
 
 .file-upload-image {
