@@ -184,7 +184,7 @@ body {
 }
 
 .result-message {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .title {
@@ -503,11 +503,10 @@ color: #222;
 text-align: center;
 }
 
-.drag-text h3 {
+.drag-text h4 {
 font-weight: 500;
 color: #15824B;
 overflow: visible;
-font-family: 'Noto Serif KR', serif;
 }
 
 .file-upload-image {
