@@ -161,6 +161,11 @@ height: 100px;
   background: none;
 }
 
+.no-hack-text{
+  font-family: 'Noto Serif KR', serif;
+  text-align: center;
+}
+
 body {
   margin :0;
   height: 100%;
@@ -518,7 +523,7 @@ margin-top:0px;
 
 .try-again-text {
  display: block;
- font-size: 1.5rem;
+ font-size: 1.2rem;
  text-align: center;
  color: #ffffff;
  padding: 4px 15px;
@@ -534,7 +539,7 @@ margin-top:0px;
   
 .index-btn-text {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
   color:  #35465d;
   padding: 4px 15px;
