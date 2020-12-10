@@ -9,7 +9,10 @@ body {
 .section {
   margin-top: 50px;
   font-family: 'Noto Serif KR', serif;
+  text-align: center;
 }
+
+
 
 .wrapperbutton{
   display : grid;
@@ -128,7 +131,7 @@ height: 100px;
 
 .buttonYellow:hover {
   color: rgb(255, 217, 0, 1);
-  background-size:none;
+  background:none;
 }
 .buttonNavy {
   background: URL(img/navy.jpg) no-repeat;
