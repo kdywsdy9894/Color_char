@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="subject" content="인공지능이 색과 사진으로 알려주는 내 감정">
+    <meta name="title" content="「이 순간, 이 색」">
+    <meta name="keywords" content="인공지능 감정 테스트, 인공지능 감성 테스트, 감성 테스트, 감정 테스트, 12색, 이 순간 이 색, 색과 사진, AI 사진, AI 색">
+    <meta name="author" content="Dyk">
+    <title>이 순간, 이 색</title>
+    <meta property="og:url" content="https://kdycolorcharacter.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="「이 순간, 이 색」" />
+    <meta property="og:description" content="인공지능이 색과 사진으로 알려주는 내 감정" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fd0f2a62cc5175a"></script>
+    <meta name="naver-site-verification" content="3ddd95c80a23e76cbbddfd26afc57d69ee024637" />
+    <link rel="canonical" href="https://kdycolorcharacter.netlify.app/">
+</head>
+
+<body>
+    <section class="section">
+        <h1 class="title">「이 순간, 이 색」</h1>
+        <h2 class="subtitle">사진으로 알아보는 당신의 감정</h2>
+        <h4 class="subtitle">당신의 감성이 담긴 그 사진, 색을 알아볼까요?</h4>
+    </section>
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <div class="mt-3 container file-upload">
+        <div class="image-upload-wrap">
+            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+            <div class="drag-text">
+                <h4 class="mb-5 pb-5 pt-4  upload-text">여기에 당신의 사진을 올려주세요.</h3>
+            </div>
+        </div>
+        <div class="file-upload-content">
+            <img class="file-upload-image" id="color-image" src="#" alt="your image" />
+            <div id="loading" class="animated bounce">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="text-center">당신의 감정을 분석중입니다...</p>
+            </div>
+            <h2 class="result-color"></h2>
+            <p class="result-message"></p>
+            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+            <div class="pt-3 image-title-wrap">
+                <button type="button p-2" class="try-again-btn" onclick="location.href = 'process.html';">
+                    <span class="try-again-text">다른 사진의 감성도 볼래요?</span>
+                </button>
+                <button type="button p-2" class="index-btn" onclick="location.href = 'index.html';">
+                    <span class="index-btn-text">무슨 색이 있었는지 볼까요?</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="webcam-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image-upload-wrap').hide();
+                    $('#loading').show();
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+                    $('.image-title').html(input.files[0].name);
+                };
+                reader.readAsDataURL(input.files[0]);
+                init().then(() => {
+                    console.log("DYK");
+                    predict();
+                    $('#loading').hide();
+                });
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+        }
+        $('.image-upload-wrap').bind('dragover', function () {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function () {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+    </script>
+    <script type="text/javascript">
+
+        const URL = "https://teachablemachine.withgoogle.com/models/CNsJUttb_/";
+
+        let model, webcam, labelContainer, maxPredictions;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) {
+                var element = document.createElement("div")
+                element.classList.add("d-flex");
+                labelContainer.appendChild(element);
+            }
+        }
+        async function predict() {
+            var image = document.getElementById("color-image")
+            const prediction = await model.predict(image, false);
+            prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+            console.log(prediction[0].className);
+            var resultcolor;
+            var resultexplain;
+            switch (prediction[0].className) {
+                case "black":
+                    resultcolor = '<span style="color:#00000">BLACK</span>';
+                    resultexplain = "공포, 어둠 그리고 악과는 반대로 섹시함을 뿜어내는 검정색! 당신은 매우 독립적이며 주위를 자신의 통제하에 놓길 바랄 확률이 높습니다. 섬세하고 내향적이지 않지만 다른 사람들과 적당한 거리를 유지하며 약점을 노출하지 않고 세련됨을 유지합니다. 당신은 성공할 수 있지만 만족하지 못하고 마음 어딘가 남아있는 공허함에 끝없는 갈망을 느낄 수도 있습니다. 또한 깊이를 알 수 없는 속에서 나오는 절제됨은 많은 사람들이 섹시하다고 생각합니다. 내일은 검정색 옷을 맞춰 입고 이성에게 어필해보는 것은 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/black.jpg')";
+                    break;
+                case "blue":
+                    resultcolor = '<span style="color:#0000ff">BLUE</span>';
+                    resultexplain = "오늘도 내 주식은 파란불이군... 평화와 고요함의 상징인 파란색은 실제로 혈압을 낮추며 업무 생산성을 높이는데 효과가 있다고 합니다. 이 색을 택한 당신은 대체로 조화롭고 의지할 수 있고 감수성이 풍부한 사람입니다. 사회성이 또한 뛰어나며 소위 말하는 '인싸'일 확률이 높습니다. 하지만 스스로를 돌보지 못하고 보이는 것과 달리 비밀이 많을 수 있습니다. 남성들과 페이스북 부터 삼성까지 많은 기업들이 사랑한 파란색! 내일은 남보다 자신을 먼저 돌보는것이 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/blue.jpg')";
+                    break;
+                case "brown":
+                    resultcolor = '<span style="color:#a52a2a">BROWN</span>';
+                    resultexplain = "진실되고, 확고한 당신! 가장 당신에게 필요한 것은 주위의 가장 소중한 사람들로 부터 얻는 안정과 굴곡 없는 삶입니다. 당신은 이를 얻기 위해 자신의 주어진 책임과 의무에 최선을 다할 확률이 높습니다. 그렇기에 가족과 친구를 소중히 여깁니다. 가끔 다른 사람들로 부터 유머가 없고 지루하다는 소리를 들을 때도 있습니다. 땅처럼 우직하고 의지할 수 있는 사람이지만 외롭고 고립되어 있다는 느낌을 받을 수 있습니다. 오늘 자기전에 가족들에게 사랑한다는 한마디 해보는것이 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/brown.jpg')";
+                    break;
+                case "gray":
+                    resultcolor = '<span style="color:#808080">GRAY</span>';
+                    resultexplain = "당신은 중립을 잘 지키고 공평하면서도 결단력이 부족한가요? 당신은 침착하고 평온하며 남들 눈에 띄는걸 좋아하지 않을 확률이 높습니다. 가끔 자신의 행동을 제어하고 비관적으로 바라볼 때가 있습니다. 삶의 안정, 균형을 굉장히 중요시 여기며 그것을 유지하기 위해 타협합니다. 대표적인 무난한 색깔이기에 패션, 교통수단 부터 전자기기까지 많은 곳에 자주 활용합니다. 독립적이지만 독창성이 부족한 당신, 내일은 생각의 틀을 깨고 시야를 넓혀보는것이 어떨까요? "
+                    document.body.style.backgroundImage = "url('img/gray.jpg')";
+                    break;
+                case "green":
+                    resultcolor = '<span style="color:#008000">GREEN</span>';
+                    resultexplain = "새싹들이 피어오르는 상상을 해보세요! 자연, 성장, 회복 등을 상징하는 초록색은 건강하고 믿음을 줍니다. 이에 많은 기업들이 브랜딩에, 그 중에서도 스타벅스 같은 음식과 관련된 기업들이 자주 활용합니다. 당신은 성실하고 신뢰할 수 있으며 EQ가 비교적 높을 확률이 높습니다. 또한 온화하고 관대하며 친절하므로 조직을 형성하는데 반드시 필요한 색입니다. 또한 이 색은 당신의 스트레스를 환기와 완화를 시켜줄 것입니다. 마음이 지칠땐 자연에 몸을 맡겨보는 것이 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/gray.jpg')";
+                    break;
+                case "mint":
+                    resultcolor = '<span style="color:#00FFFF">MINT</span>';
+                    resultexplain = "민트냐 치약이냐 그것이 문제로다! 당신은 독립적이고 자존감이 높으며 남의 주장에 흔들리지 않을 확률이 높습니다. 독창적이고 창의적인 생각은 당신의 직관에서 비교적 자주 나옵니다. 가끔 이기적이다 라는 얘기를 들을 수 있으니 주의해야 합니다. 친근하고 사회성이 좋은 당신은 한가지 일을 진득히 하는것보다 여러가지 일을 동시에 처리하는 것을 선호합니다.  참고로 당신은 자신의 나이보다 더 오래 살았다고 생각을 합니다. 참고로 저는 민트파, 찍먹파 입니다!"
+                    document.body.style.backgroundImage = "url('img/mint.jpg')";
+                    break;
+                case "navy":
+                    resultcolor = '<span style="color:#000080">NAVY</span>';
+                    resultexplain = "전생의 영국 해군이였나요? 당신은 진지하고 프로페셔널한 사람일 확률이 높습니다. 또한 경찰과 같은 신뢰할 수 있고 안정적인 사람입니다. 당신은 보수적이며 권위와 지켜야 하는 법을 존중하며 잘 따릅니다. 하지만 오히려 말하지 않은 많은 비밀들을 숨기고 있을 수 있습니다. 문제와 직면하는 것을 좋아하진 않지만 잘 이겨낼 수 있는 능력이 있습니다. 영국 해군이 나오는 영화 캐리비안의 해적을 보며 남색의 유래를 알아보는것이 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/navy.jpg')";
+                    break;
+                case "orange":
+                    resultcolor = '<span style="color:#FFA500">ORANGE</span>';
+                    resultexplain = "호불호가 크게 갈리는 색입니다! 위험과 주의를 뜻하는 주황색은 식욕을 돋고 에너지를 끌어 올리는 동시에 신진대사를 촉진시킵니다. 당신은 재미와 다양성 그리고 자유를 원할 확률이 높습니다. 이 색을 띄는 불과 같이 열정적이면서도 따뜻한 당신은 많은 사람들에게 행복을 가져다 줄 수 있습니다. 동시에 주위 사람들의 기를 눌러 미움을 살 수 있기 때문에 조심하는게 좋습니다. 주황색은 영어로 orange입니다. 내일은 식욕을 돋기위해 orange와 귤을 먹어보는것이 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/orange.jpg')";
+                    break;
+                case "pink":
+                    resultcolor = '<span style="color:#FFC0CB">PINK</span>';
+                    resultexplain = "물건을 구매할 때 신분증 보여달라는 말을 듣는 동안인 당신! 당신은 로맨틱하고 관대하며 감수성이 풍부한 사람일 확률이 높습니다. 또한 친근한 동시에 모성애가 깊어 주위 사람들을 지키고 싶어 합니다. 하지만 당신이 주는 사랑과 보호만큼 남들에게 받는것이 필요합니다. 자신감을 기르고 자신을 사랑하는 법을 배워야겠습니다. 그럼 남들에게 주는 당신의 사랑도 배가 될 것입니다. 오늘 밤, 핑크색을 고른 이성과 연락을 해보세요!"
+                    document.body.style.backgroundImage = "url('img/pink.jpg')";
+                    break;
+                case "purple":
+                    resultcolor = '<span style="color:#800080">PURPLE</span>';
+                    resultexplain = "알렉산더 대왕과 이집트의 파라오들이 사랑한 보라색! 뿐만 아니라 유니콘부터 마법까지 모두 보라색입니다. 자연속에서 찾기 힘든 색이므로 고귀하며 젊은 여성들이 선호하는 색으로 알려져 있습니다. 또한 베일에 쌓인 신비감을 주기때문에 호기심을 자극하고 흥미를 유발합니다. 이 색을 통해 당신은 통찰력을 키워 창의성을 높일 수 있습니다. 당신은 자비롭고 이해심이 많으며 자유로윤 영혼일 확률이 높습니다. 오늘은 라벤더 꽃을 사서 좋아하는 사람에게 마음을 표현하는것을 상상해보는게 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/purple.jpg')";
+                    break;
+                case "red":
+                    resultcolor = '<span style="color:#FF0000">RED</span>';
+                    resultexplain = "지금 사랑을 느끼나요, 분노를 느끼나요? 빨간색은 공격적이고 경감심을 주는 동시에 주의를 단번에 사로잡을 수 있으며 가장 열정적인 색입니다. 당신은 이 색을 통해 가장 뚜렷한 감정을 내비칠 수 있으며 일상생활에서도 사이렌, 표지판, 간판등 곳곳에서 접할 수 있습니다. 당신은 외향적이며 용기있고 낙관적인 사람일 확률이 높습니다. 야망이 크고 경쟁을 즐기는 당신은 꿈을 향해 쫓는것에 대해 두려움이란 없습니다. 하지만 당신은 성격이 급하고 다혈질일 수도 있습니다. 넘치는 열정을 사랑에 쏟아보는걸 어떨까요?"
+                    document.body.style.backgroundImage = "url('img/red.jpg')";
+                    break;
+                case "yellow":
+                    resultcolor = '<span style="color:#ffd900">YELLOW</span>';
+                    resultexplain = "지금 이 색과 같이 오늘은 당신이 제일 빛이 나는 사람입니다! 당신은 창의적이고 기운이 넘치지만 걱정과 근심이 많을 확률이 높습니다. 충동적인 노란색은 기운이 넘치며 가끔은 당신이 사람 위에 서 있다고 거만한 생각을 할 때도 있습니다. 다양한 분야의 깊은 지식을 동원해 옳바른 생각을 내릴 수 있습니다. 이 색은 인간이 볼 수 있는 가장 밝은 색입니다. 밝게 빛이 나는 당신, 내일은 트랜스포머의 범블비와 같이 감동과 재미를 선사하며 누군가의 빛이 되어볼까요?"
+                    document.body.style.backgroundImage = "url('img/yellow.jpg')";
+                    break;
+                default:
+                    resultcolor = "NONE"
+                    resultexplain = ""
+            }
+            var explain = "<div class='color-explain pt-2'>" + resultexplain + "</div>"
+            $('.result-color').html(resultcolor);
+            $('.result-message').html(resultexplain);
+            var barWidth;
+            for (let i = 0; i < 4; i++) {
+                if (prediction[i].probability.toFixed(2) >= 0.1) {
+                    barWidth = Math.round(prediction[i].probability.toFixed(2) * 100) + "%";
+                } else if (prediction[i].probability.toFixed(2) > 0.01) {
+                    barWidth = "5%"
+                } else {
+                    barWidth = "3%"
+                }
+                var labelTitle;
+                switch (prediction[i].className) {
+                    case "blue":
+                        labelTitle = '<span style="color:#0000ff">파란색</span>';
+                        break;
+                    case "black":
+                        labelTitle = '<span style="color:#00000">검은색</span>';
+                        break;
+                    case "brown":
+                        labelTitle = '<span style="color:#a52a2a">갈색</span>';
+                        break;
+                    case "gray":
+                        labelTitle = '<span style="color:#808080">회색</span>';
+                        break;
+                    case "green":
+                        labelTitle = '<span style="color:#008000">초록색</span>';
+                        break;
+                    case "mint":
+                        labelTitle = '<span style="color:#00FFFF">민트색</span>';
+                        break;
+                    case "navy":
+                        labelTitle = '<span style="color:#000080">남색</span>';
+                        break;
+                    case "orange":
+                        labelTitle = '<span style="color:#FFA500">주황색</span>';
+                        break;
+                    case "pink":
+                        labelTitle = '<span style="color:#FFC0CB">핑크색</span>';
+                        break;
+                    case "purple":
+                        labelTitle = '<span style="color:#800080">보라색</span>';
+                        break;
+                    case "red":
+                        labelTitle = '<span style="color:#FF0000">빨강색</span>';
+                        break;
+                    case "yellow":
+                        labelTitle = '<span style="color:#ffd900">노란색</span>';
+                        break;
+                    default:
+                        labelTitle = "알수없음"
+                }
+                var label = "<div class='color-label d-flex align-items-center'>" + labelTitle + "</div>"
+                var bar = "<div class='bar-container position-relative container'><div class='" + prediction[i].className + "-box'></div><div class='d-flex justify-content-center align-items-center " + prediction[i].className + "-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></div>"
+                labelContainer.childNodes[i].innerHTML = label + bar;
+            }
+        }
+    </script>
+</body>
+<!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+    persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+    OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+
+</html>
