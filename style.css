@@ -164,6 +164,12 @@ height: 100px;
   background: none;
 }
 
+.norelre{
+  font-family: 'Noto Serif KR', serif;
+  text-align: center;
+  margin-bottom : 10px;
+}
+
 .no-hack-text{
   font-family: 'Noto Serif KR', serif;
   text-align: center;
