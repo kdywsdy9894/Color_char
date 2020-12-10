@@ -1,2 +1,3 @@
 User-agent: *
 Allow:/
+Sitemap: https://kdycolorcharacter.netlify.app/sitemap.xml
