@@ -4,11 +4,11 @@ html {
 
 body {
   margin :0;
-  font-family: 'Noto Serif KR', serif;
 }
 
 .section {
   margin-top: 50px;
+  font-family: 'Noto Serif KR', serif;
 }
 
 .wrapperbutton{
@@ -184,7 +184,8 @@ body {
 }
 
 .result-message {
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-family: 'Noto Serif KR', serif;
 }
 
 .title {
