@@ -71,7 +71,7 @@ height: 100px;
 }
 
 .buttonGray {
-  background:URL(img/gray.jpg) no-repeat;
+  background: gray no-repeat;
   color: white;
   background-size:cover;
 }
@@ -82,7 +82,7 @@ height: 100px;
 } 
 
 .buttonBlack {
-  background:URL(img/black.jpg) no-repeat;
+  background: black no-repeat;
   color:white;
   background-size:cover;
 }
@@ -94,7 +94,7 @@ height: 100px;
 }
 
 .buttonBrown {
-  background: url(img/brown.jpg) no-repeat;
+  background: rgba(165, 42, 42, 1) no-repeat;
   color:white;
   background-size:cover;
 }
