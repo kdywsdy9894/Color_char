@@ -167,8 +167,8 @@ height: 100px;
 .norelre{
   font-family: 'Noto Serif KR', serif;
   text-align: center;
-  margin-bottom : 10px;
-  margin-top : 15px;
+  margin-bottom : 15px;
+  margin-top : 7px;
 }
 
 .no-hack-text{
@@ -583,13 +583,17 @@ transition: all .2s ease;
   font-family: 'Noto Serif KR', serif;
 }
 
-.ad-banner{
+.ad-banner1{
   width: 320px;
   margin :0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top : 10px;
 }
 
+.ad-banner2{
+  width:320px;
+  margin: 0 auto;
+  margin-top:10px;
+}
 @media screen and (max-width: 600px) {
   body {
     font-size : 10px;
