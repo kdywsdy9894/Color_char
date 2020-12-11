@@ -567,7 +567,15 @@ border: 0;
 transition: all .2s ease;
 }
 
-.footer {
+.footer-index {
+  margin-bottom : 10px;
+  margin-top : 20px;
+  text-align : center;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.footer-process {
+  font-size : 10px;
   margin-bottom : 10px;
   margin-top : 20px;
   text-align : center;
